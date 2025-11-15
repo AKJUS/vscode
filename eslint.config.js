@@ -8,7 +8,7 @@ import path from 'path';
 import tseslint from 'typescript-eslint';
 
 import stylisticTs from '@stylistic/eslint-plugin-ts';
-import * as pluginLocal from './.eslint-plugin-local/index.js';
+import * as pluginLocal from './.eslint-plugin-local/index.ts';
 import pluginJsdoc from 'eslint-plugin-jsdoc';
 
 import pluginHeader from 'eslint-plugin-header';
@@ -90,6 +90,7 @@ export default tseslint.config(
 			'local/code-no-reader-after-await': 'warn',
 			'local/code-no-observable-get-in-reactive-context': 'warn',
 			'local/code-policy-localization-key-match': 'warn',
+			'local/code-no-localization-template-literals': 'error',
 			'local/code-no-deep-import-of-internal': ['error', { '.*Internal': true, 'searchExtTypesInternal': false }],
 			'local/code-layering': [
 				'warn',
@@ -183,7 +184,8 @@ export default tseslint.config(
 	// Disallow 'in' operator except in type predicates
 	{
 		files: [
-			'**/*.ts'
+			'**/*.ts',
+			'.eslint-plugin-local/**/*.ts', // Explicitly include files under dot directories
 		],
 		ignores: [
 			'src/bootstrap-node.ts',
